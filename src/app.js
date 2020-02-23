@@ -1,27 +1,25 @@
 // source goes here
 const app = function() {
 	// table
-	var lastClicked;
-	var grid = clickableGrid(4, 3, function(el, row, col, i) {
+	let lastClicked;
+	const grid = clickableGrid(4, 3, function(el, row, col, i) {
 		// console.log("You clicked on item #:",i);
-		// console.log("row #:",row);
-		// console.log("col #:",col);
 
 		// multiples
-		var n = 12;
-		var clickedNum = i;
+		const n = 12;
+		const clickedNum = i;
 
-		// array of numbers
-		var arrOfNums = [];
-		for (var m = clickedNum; m <= n; m++) {
+		// array of all numbers
+		const arrOfNums = [];
+		for (let m = clickedNum; m <= n; m++) {
 			arrOfNums.push(m);
 		}
 
 		// finding multiples
 		function multiplesOf(numbers, number) {
 			// add second argument
-			var multiples = []; // change to array (so that we can store multiple numbers - not just one multiple)
-			for (var j = 0; j < numbers.length; j++) {
+			let multiples = []; // change to array (so that we can store multiple numbers - not just one multiple)
+			for (let j = 0; j < numbers.length; j++) {
 				if (numbers[j] % number === 0) {
 					// divide by the number
 					multiples.push(numbers[j]); // add the current multiple found to the multiples array
@@ -31,7 +29,7 @@ const app = function() {
 		}
 
 		console.log(multiplesOf(arrOfNums, clickedNum));
-		var myArr = multiplesOf(arrOfNums, clickedNum);
+		const myArr = multiplesOf(arrOfNums, clickedNum);
 
 		el.className = 'clicked multiples';
 		if (lastClicked) {
@@ -39,19 +37,29 @@ const app = function() {
 		}
 		lastClicked = el;
 		console.log('lastClicked------------', lastClicked);
-		addClassToMultiples();
 
-		//https://stackoverflow.com/questions/36313778/adding-class-to-specific-cells-of-a-html-table
-		function addClassToMultiples() {
-			var tds = document.querySelectorAll('.grid td');
+		if (el.classList.contains('clicked')) {
+			addClassToMultiples();
+		} else {
+			let tds = document.querySelectorAll('.grid td');
 			//iterate over each td
-			for (var i = 0; i < n; i++) {
-				var text = tds[i].innerText;
+			for (let i = 0; i < n; i++) {
+				tds[i].classList.remove('multiples');
+			}
+		}
+
+		function addClassToMultiples() {
+			let tds = document.querySelectorAll('.grid td');
+			//iterate over each td
+			for (let i = 0; i < n; i++) {
+				const text = tds[i].innerText;
+				tds[i].classList.remove('multiples');
 				myArr.forEach(function(value) {
 					if (text === value.toString()) {
 						//add your class to the element containing this text
 						console.log('tds[i]', tds[i]);
-						tds[i].classList.toggle('multiples');
+						tds[i].classList.add('multiples');
+						// tds[i].classList.toggle('multiples');
 						tds[clickedNum - 1].classList.remove('multiples');
 					}
 				});
@@ -62,14 +70,14 @@ const app = function() {
 	document.body.appendChild(grid);
 
 	function clickableGrid(rows, cols, callback) {
-		var i = 0;
-		var grid = document.createElement('table');
+		let i = 0;
+		const grid = document.createElement('table');
 		grid.className = 'grid';
-		for (var r = 0; r < rows; ++r) {
-			var tr = grid.appendChild(document.createElement('tr'));
+		for (let r = 0; r < rows; ++r) {
+			const tr = grid.appendChild(document.createElement('tr'));
 			// console.log('tr', tr.rowIndex);
-			for (var c = 0; c < cols; ++c) {
-				var cell = tr.appendChild(document.createElement('td'));
+			for (let c = 0; c < cols; ++c) {
+				const cell = tr.appendChild(document.createElement('td'));
 				// console.log('td', cell.cellIndex);
 				cell.innerHTML = ++i;
 				cell.addEventListener(
