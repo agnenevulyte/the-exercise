@@ -2,15 +2,18 @@
 const app = function() {
 	// table
 	let lastClicked;
-	const grid = clickableGrid(4, 3, function(el, row, col, i) {
-		// console.log("You clicked on item #:",i);
 
+	const grid = clickableGrid(function(el, row, col, i) {
 		// multiples
 		const n = 12;
 		const clickedNum = i;
 
+		calculations(n, clickedNum, el);
+	});
+
+	function calculations(n, clickedNum, el) {
 		// array of all numbers
-		const arrOfNums = [];
+		let arrOfNums = [];
 		for (let m = clickedNum; m <= n; m++) {
 			arrOfNums.push(m);
 		}
@@ -65,14 +68,33 @@ const app = function() {
 				});
 			}
 		}
-	});
+	}
 
 	document.body.appendChild(grid);
 
-	function clickableGrid(rows, cols, callback) {
+	function clickableGrid(callback) {
 		let i = 0;
+		let rows;
+		let cols;
+		const mobileWidth = 768;
+		const ipadWidth = 1024;
 		const grid = document.createElement('table');
 		grid.className = 'grid';
+		if (window.innerWidth <= mobileWidth) {
+			rows = 12;
+			// console.log(rows);
+			cols = 1;
+		}
+		if (mobileWidth < window.innerWidth <= ipadWidth) {
+			rows = 6;
+			// console.log(rows);
+			cols = 2;
+		}
+		if (window.innerWidth > ipadWidth) {
+			rows = 4;
+			// console.log(rows);
+			cols = 3;
+		}
 		for (let r = 0; r < rows; ++r) {
 			const tr = grid.appendChild(document.createElement('tr'));
 			// console.log('tr', tr.rowIndex);
