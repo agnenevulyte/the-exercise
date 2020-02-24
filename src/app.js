@@ -75,15 +75,14 @@ const app = function() {
 		}
 
 		// finding multiples
-	const multiplesOf = (numbers, number) => {
-			// add second argument
-			let multiples = []; // change to array (so that we can store multiple numbers - not just one multiple)
-			for (let j = 0; j < numbers.length; j++) {
-				if (numbers[j] % number === 0) {
-					// divide by the number
-					multiples.push(numbers[j]); // add the current multiple found to the multiples array
+	const multiplesOf = numbers => {
+			// change to array (so that we can store multiple numbers - not just one multiple)
+			let multiples = numbers.filter(number => {
+				if (number % clickedNum === 0) {
+					return number;
 				}
-			}
+			});
+			
 			return multiples;
 		}
 
