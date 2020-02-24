@@ -95,6 +95,18 @@ const app = function() {
 			// console.log(rows);
 			cols = 3;
 		}
+
+		// if (window.matchMedia("(max-width: 1000px)").matches) {
+		// 	rows = 6;
+		// 	cols = 2;
+		// 	console.log(rows)
+		// 	} else {
+		// 	rows = 4;
+		// 	cols = 3;
+		// 	}
+		// }
+		// window.onresize = getDimensions;
+
 		for (let r = 0; r < rows; ++r) {
 			const tr = grid.appendChild(document.createElement('tr'));
 			// console.log('tr', tr.rowIndex);
