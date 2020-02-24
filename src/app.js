@@ -1,78 +1,7 @@
 // source goes here
 const app = function() {
-	// table
-	let lastClicked;
 
-	const grid = clickableGrid(function(el, row, col, i) {
-		// multiples
-		const n = 12;
-		const clickedNum = i;
-
-		calculations(n, clickedNum, el);
-	});
-
-	function calculations(n, clickedNum, el) {
-		// array of all numbers
-		let arrOfNums = [];
-		for (let m = clickedNum; m <= n; m++) {
-			arrOfNums.push(m);
-		}
-
-		// finding multiples
-		function multiplesOf(numbers, number) {
-			// add second argument
-			let multiples = []; // change to array (so that we can store multiple numbers - not just one multiple)
-			for (let j = 0; j < numbers.length; j++) {
-				if (numbers[j] % number === 0) {
-					// divide by the number
-					multiples.push(numbers[j]); // add the current multiple found to the multiples array
-				}
-			}
-			return multiples;
-		}
-
-		console.log(multiplesOf(arrOfNums, clickedNum));
-		const myArr = multiplesOf(arrOfNums, clickedNum);
-
-		el.className = 'clicked multiples';
-		if (lastClicked) {
-			lastClicked.className = '';
-		}
-		lastClicked = el;
-		console.log('lastClicked------------', lastClicked);
-
-		if (el.classList.contains('clicked')) {
-			addClassToMultiples();
-		} else {
-			let tds = document.querySelectorAll('.grid td');
-			//iterate over each td
-			for (let i = 0; i < n; i++) {
-				tds[i].classList.remove('multiples');
-			}
-		}
-
-		function addClassToMultiples() {
-			let tds = document.querySelectorAll('.grid td');
-			//iterate over each td
-			for (let i = 0; i < n; i++) {
-				const text = tds[i].innerText;
-				tds[i].classList.remove('multiples');
-				myArr.forEach(function(value) {
-					if (text === value.toString()) {
-						//add your class to the element containing this text
-						console.log('tds[i]', tds[i]);
-						tds[i].classList.add('multiples');
-						// tds[i].classList.toggle('multiples');
-						tds[clickedNum - 1].classList.remove('multiples');
-					}
-				});
-			}
-		}
-	}
-
-	document.body.appendChild(grid);
-
-	function clickableGrid(callback) {
+	const clickableGrid = callback => {
 		let i = 0;
 		let rows;
 		let cols;
@@ -127,6 +56,77 @@ const app = function() {
 		}
 		return grid;
 	}
+	// table
+	let lastClicked;
+
+	const grid = clickableGrid(function(el, row, col, i) {
+		// multiples
+		const n = 12;
+		const clickedNum = i;
+
+		calculations(n, clickedNum, el);
+	});
+
+	const calculations = (n, clickedNum, el) => {
+		// array of all numbers
+		let arrOfNums = [];
+		for (let m = clickedNum; m <= n; m++) {
+			arrOfNums.push(m);
+		}
+
+		// finding multiples
+	const multiplesOf = (numbers, number) => {
+			// add second argument
+			let multiples = []; // change to array (so that we can store multiple numbers - not just one multiple)
+			for (let j = 0; j < numbers.length; j++) {
+				if (numbers[j] % number === 0) {
+					// divide by the number
+					multiples.push(numbers[j]); // add the current multiple found to the multiples array
+				}
+			}
+			return multiples;
+		}
+
+		console.log(multiplesOf(arrOfNums, clickedNum));
+		const myArr = multiplesOf(arrOfNums, clickedNum);
+
+		const addClassToMultiples = () => {
+			let tds = document.querySelectorAll('.grid td');
+			//iterate over each td
+			for (let i = 0; i < n; i++) {
+				const text = tds[i].innerText;
+				tds[i].classList.remove('multiples');
+				myArr.forEach(function(value) {
+					if (text === value.toString()) {
+						//add your class to the element containing this text
+						console.log('tds[i]', tds[i]);
+						tds[i].classList.add('multiples');
+						// tds[i].classList.toggle('multiples');
+						tds[clickedNum - 1].classList.remove('multiples');
+					}
+				});
+			}
+		}
+
+		el.className = 'clicked multiples';
+		if (lastClicked) {
+			lastClicked.className = '';
+		}
+		lastClicked = el;
+		console.log('lastClicked------------', lastClicked);
+
+		if (el.classList.contains('clicked')) {
+			addClassToMultiples();
+		} else {
+			let tds = document.querySelectorAll('.grid td');
+			//iterate over each td
+			for (let i = 0; i < n; i++) {
+				tds[i].classList.remove('multiples');
+			}
+		}
+	}
+	document.body.appendChild(grid);
+
 };
 
 export default app;
