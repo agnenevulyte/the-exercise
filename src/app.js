@@ -1,7 +1,19 @@
 // source goes here
+
+
 const app = function() {
 
 	const clickableGrid = callback => {
+
+		function myFunc() {
+
+			console.log('calling me twice3333')
+		// const x = document.getElementsByTagName("BODY")[0].contains('.grid');
+		// console.log('x---------------------', x)
+		}
+
+		window.addEventListener('resize', myFunc);
+
 		let i = 0;
 		let rows;
 		let cols;
@@ -14,7 +26,7 @@ const app = function() {
 			// console.log(rows);
 			cols = 1;
 		}
-		if (mobileWidth < window.innerWidth <= ipadWidth) {
+		if (mobileWidth < window.innerWidth && window.innerWidth <= ipadWidth) {
 			rows = 6;
 			// console.log(rows);
 			cols = 2;
@@ -24,17 +36,6 @@ const app = function() {
 			// console.log(rows);
 			cols = 3;
 		}
-
-		// if (window.matchMedia("(max-width: 1000px)").matches) {
-		// 	rows = 6;
-		// 	cols = 2;
-		// 	console.log(rows)
-		// 	} else {
-		// 	rows = 4;
-		// 	cols = 3;
-		// 	}
-		// }
-		// window.onresize = getDimensions;
 
 		for (let r = 0; r < rows; ++r) {
 			const tr = grid.appendChild(document.createElement('tr'));
@@ -125,7 +126,6 @@ const app = function() {
 		}
 	}
 	document.body.appendChild(grid);
-
 };
 
 export default app;
