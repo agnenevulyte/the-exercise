@@ -4,38 +4,11 @@
 const app = function() {
 
 	const clickableGrid = callback => {
-
-		function myFunc() {
-
-			console.log('calling me twice3333')
-		// const x = document.getElementsByTagName("BODY")[0].contains('.grid');
-		// console.log('x---------------------', x)
-		}
-
-		window.addEventListener('resize', myFunc);
-
 		let i = 0;
-		let rows;
-		let cols;
-		const mobileWidth = 768;
-		const ipadWidth = 1024;
+		const rows = 144;
+		const cols = 1;
 		const grid = document.createElement('table');
 		grid.className = 'grid';
-		if (window.innerWidth <= mobileWidth) {
-			rows = 12;
-			// console.log(rows);
-			cols = 1;
-		}
-		if (mobileWidth < window.innerWidth && window.innerWidth <= ipadWidth) {
-			rows = 6;
-			// console.log(rows);
-			cols = 2;
-		}
-		if (window.innerWidth > ipadWidth) {
-			rows = 4;
-			// console.log(rows);
-			cols = 3;
-		}
 
 		for (let r = 0; r < rows; ++r) {
 			const tr = grid.appendChild(document.createElement('tr'));
@@ -46,11 +19,11 @@ const app = function() {
 				cell.innerHTML = ++i;
 				cell.addEventListener(
 					'click',
-					(function(el, r, c, i) {
+					(function(el, i) {
 						return function() {
-							callback(el, r, c, i);
+							callback(el, i);
 						};
-					})(cell, r, c, i),
+					})(cell, i),
 					false
 				);
 			}
@@ -60,9 +33,10 @@ const app = function() {
 	// table
 	let lastClicked;
 
-	const grid = clickableGrid(function(el, row, col, i) {
+
+	const grid = clickableGrid(function(el, i) {
 		// multiples
-		const n = 12;
+		const n = 144;
 		const clickedNum = i;
 
 		calculations(n, clickedNum, el);
