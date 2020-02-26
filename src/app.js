@@ -1,11 +1,17 @@
 // source goes here
 
-
 const app = function() {
+
+		const input = document.getElementById('myNumber');
+		input.addEventListener('change', (event) => {
+			const result = document.getElementById('result');
+			result.textContent = event.target.value;
+			let rows = result.textContent;
+			console.log('rows--------', rows )
 
 	const clickableGrid = callback => {
 		let i = 0;
-		const rows = 144;
+		// const rows = 2;
 		const cols = 1;
 		const grid = document.createElement('table');
 		grid.className = 'grid';
@@ -100,6 +106,6 @@ const app = function() {
 		}
 	}
 	document.body.appendChild(grid);
-};
+}, false)}
 
 export default app;

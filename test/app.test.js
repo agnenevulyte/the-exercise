@@ -6,6 +6,12 @@ describe('app', function() {
   });
 });
 
+describe('multiples', () => {
+  it('should output the multiples', () => {
+    expect(clickableGrid(72,)).toBe(144)
+  })
+})
+
 // does the table exist
 // does it have 144 mini tables
 
