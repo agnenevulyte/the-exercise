@@ -16,7 +16,7 @@ const calculations = (rows, clickedNum, el) => {
     if (el.classList.contains('clicked')) {
         addClassToMultiples(rows, clickedNum);
     } else {
-        let tds = document.querySelectorAll('.grid td');
+        const tds = document.querySelectorAll('.grid td');
         for (let i = 0; i < rows; i++) {
             tds[i].classList.remove('multiples');
         }
