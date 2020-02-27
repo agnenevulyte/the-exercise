@@ -5,7 +5,7 @@ const multiplesOf = (numbers, clickedNum) => {
             return number;
         }
     });
-    
+    // console.log('multiples-----', multiples)
     return multiples;
 }
 
